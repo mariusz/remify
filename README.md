@@ -2,7 +2,7 @@
 
 Simple set of Sass mixin and function to quickly convert pixels to rems.
 This solution assumes that baseline is 10px, you can override that easily
-by changing the `baseline-px` value in the `_remify.scss` file to the `remify()` function.
+by changing the `baseline-px` value in the `_remify.scss`.
 
 ## Usage
 
