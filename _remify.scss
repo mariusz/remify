@@ -24,7 +24,7 @@ $baseline-px: 10px;
     $rem-values: ();
 
     @each $value in $values {
-      $rem-values: append($rem-values, remify($values));
+      $rem-values: append($rem-values, remify($value));
     }
 
     #{$property}: $rem-values;
