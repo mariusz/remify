@@ -5,28 +5,31 @@
 
 $baseline-px: 10px;
 
-@function remify($px) {
-  $baseline-rem: $baseline-px / 1rem;
+@function remify($px, $baseline: $baseline-px) {
+  $baseline-rem: $baseline / 1rem;
 
   @if $px == 0 {
-    @return 0
-  } @else {
+    @return 0;
+  }
+
+  @if type-of(px) == "number" {
     @return $px / $baseline-rem;
+  } @else {
+    $rems: ();
+
+    @each $value in $px {
+      @if $value == 0 {
+        $rems: append($rems, $value);
+      } @else {
+        $rems: append($rems, ($value / $baseline-rem));
+      }
+    }
+
+    @return $rems;
   }
 }
 
 @mixin rem($property, $values) {
   #{$property}: $values;
-
-  @if type-of($values) == "number" {
-    #{$property}: remify($values);
-  } @else {
-    $rem-values: ();
-
-    @each $value in $values {
-      $rem-values: append($rem-values, remify($value));
-    }
-
-    #{$property}: $rem-values;
-  }
+  #{$property}: remify($values);
 }
