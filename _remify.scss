@@ -1,0 +1,32 @@
+// remify.scss
+// @function and @mixin to handle rem<->px value conversion
+//
+// by Mariusz Ciesla <http://mariusz.cc>
+
+$baseline-px: 10px;
+
+@function remify($px) {
+  $baseline-rem: $baseline-px / 1rem;
+
+  @if $px == 0 {
+    @return 0
+  } @else {
+    @return $px / $baseline-rem;
+  }
+}
+
+@mixin rem($property, $values) {
+  #{$property}: $values;
+
+  @if type-of($values) == "number" {
+    #{$property}: remify($values);
+  } @else {
+    $rem-values: ();
+
+    @each $value in $values {
+      $rem-values: append($rem-values, remify($values));
+    }
+
+    #{$property}: $rem-values;
+  }
+}
