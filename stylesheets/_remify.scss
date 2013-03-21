@@ -5,7 +5,7 @@
 
 $baseline-px: 10px;
 
-@function remify($px, $baseline: $baseline-px) {
+@function remify($px) {
   $baseline-rem: $baseline / 1rem;
 
   @if $px == 0 {
